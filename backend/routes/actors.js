@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 var models = require('../models');
 var passport = require('passport');
+var middlewares = require ('../middlewares/cors');
 
 router.get('/', (req, res) => {
     models.Actor.findAll({

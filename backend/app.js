@@ -4,6 +4,9 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var sequelize = require('sequelize');
+const corsMiddleware = require('./middlewares/cors.js');
+
+const Cors = require('cors');
 
 var models = require('./models');
 
@@ -26,6 +29,9 @@ app.use(passport.session());
 app.use(sequelize);
 
 app.use(logger('dev'));
+
+// CORS config
+app.use(Cors());
 
 // Passport config
 require('./config/passport')(passport, models.User);
@@ -53,5 +59,7 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.send(err);
 });
+
+
 
 module.exports = app;
